@@ -1,3 +1,30 @@
+/* ============== ANIMAÇÕES DE ENTRADA ============== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:opacity .9s ease, transform .9s ease;
+  will-change:opacity, transform;
+}
+.reveal.is-visible{
+  opacity:1;
+  transform:translateY(0);
+}
+.reveal--delay-1{transition-delay:.1s}
+.reveal--delay-2{transition-delay:.2s}
+.reveal--delay-3{transition-delay:.3s}
+.reveal--delay-4{transition-delay:.4s}
+@media (prefers-reduced-motion: reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+}
+
 /* ============== RESET / BASE ============== */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -206,32 +233,74 @@ em{font-style:italic;font-weight:500}
 .empresa{
   padding:80px 0;
   scroll-margin-top:80px;
+  color:var(--preto);
+  background:var(--branco);
 }
-.empresa--alt{background:var(--cinza-100)}
+.empresa--escura{
+  background:var(--preto);
+  color:var(--branco);
+}
+.empresa .secao__titulo{color:var(--preto)}
+.empresa--escura .secao__titulo{color:var(--branco)}
+.empresa .secao__tag{color:var(--vermelho)}
+.empresa--escura .secao__tag{color:var(--vermelho)}
+.empresa .empresa__texto p{color:var(--cinza-700)}
+.empresa--escura .empresa__texto p{color:#d6d6d6}
+.empresa .empresa__lista li{color:var(--cinza-700)}
+.empresa--escura .empresa__lista li{color:#d6d6d6}
+.empresa .empresa__lista li::before{background:var(--vermelho)}
+.empresa--escura .empresa__lista li::before{background:var(--vermelho)}
 .empresa__inner{
   display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:center;
 }
 .empresa:nth-child(even) .empresa__inner{grid-template-columns:1.4fr 1fr}
 .empresa:nth-child(even) .empresa__logo{order:2}
 .empresa__logo{
-  background:var(--branco);border:1px solid var(--cinza-300);
+  background:var(--cinza-100);border:1px solid var(--cinza-300);
   border-radius:24px;padding:50px;
   display:flex;align-items:center;justify-content:center;
   min-height:260px;
   box-shadow:0 18px 50px rgba(0,0,0,.06);
 }
+.empresa--escura .empresa__logo{
+  background:#1a1a1a;border-color:rgba(255,255,255,.08);
+  box-shadow:0 18px 50px rgba(0,0,0,.4);
+}
 .empresa__logo img{max-height:130px;width:auto;object-fit:contain}
-.empresa__texto p{font-size:1.05rem;color:var(--cinza-700);margin:14px 0 22px;max-width:560px}
-.empresa__lista{
-  list-style:none;display:grid;gap:10px;
+
+/* Cards "Pra quem é" e "Como funciona" dentro de cada empresa */
+.empresa__extras{
+  display:grid;grid-template-columns:1fr 1fr;gap:18px;
+  margin-top:28px;
 }
-.empresa__lista li{
-  padding-left:28px;position:relative;
-  font-size:.98rem;color:var(--cinza-700);
+.empresa__box{
+  background:var(--branco);border:1px solid var(--cinza-300);
+  border-radius:14px;padding:22px;
 }
-.empresa__lista li::before{
-  content:"";position:absolute;left:0;top:9px;
-  width:14px;height:2px;background:var(--vermelho);
+.empresa--escura .empresa__box{
+  background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1);
+}
+.empresa__box h4{
+  font-family:'Inter',sans-serif;font-size:.78rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--vermelho);
+  margin-bottom:12px;
+}
+.empresa__box ul{list-style:none;display:grid;gap:8px}
+.empresa__box li{
+  font-size:.92rem;color:var(--cinza-700);
+  padding-left:18px;position:relative;
+}
+.empresa--escura .empresa__box li{color:#d6d6d6}
+.empresa__box li::before{
+  content:"→";position:absolute;left:0;top:0;
+  color:var(--vermelho);font-weight:700;
+}
+
+@media (max-width:860px){
+  .empresa__inner,
+  .empresa:nth-child(even) .empresa__inner{grid-template-columns:1fr;gap:30px}
+  .empresa:nth-child(even) .empresa__logo{order:0}
+  .empresa__logo{min-height:200px;padding:30px}
 }
 
 @media (max-width:860px){
